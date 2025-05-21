@@ -1,5 +1,44 @@
-# Vue 3 + Vite
+# AutoEver Vue Practice
+## Configuration
+- JS(Java Script) Package manager: Yarn
+- Build tool: Vite
+- JS framework: Vue
+- CSS framework: tailwind
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+### Configuration setting
+- Setting project
+```bash
+yarn create vite my-project-name
+cd my-project-name
+```
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+- Install tailwind
+```bash
+yarn add -D tailwindcss@3.4.17 postcss autoprefixer
+yarn tailwindcss init -p
+```
+
+> check `postcss.config.js` and `tailwind.config.js` are created.
+
+- Setting tailwind
+
+Write code in the `tailwind.config.js` file
+
+```js
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+```
+
+Write code in the `style.css` file
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
