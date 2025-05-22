@@ -78,6 +78,8 @@ const login = async () => {
     const user = {
       email: member.email,
       password: member.password,
+      name: member.name,
+      phone: member.phone,
     };
     localStorage.setItem(user, JSON.stringify(user));
   }
