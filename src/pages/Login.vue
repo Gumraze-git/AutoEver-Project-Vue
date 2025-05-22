@@ -4,31 +4,21 @@
       <h2 class="text-2xl font-bold text-gray-800 text-center">Login</h2>
       <div class="space-y-6 mt-6">
         <!-- Email Input -->
-        <div>
-          <label for="email" class="block text-sm font-medium text-gray-700">
-            Email
-          </label>
-          <input
-            v-model="member.email"
-            id="email"
-            type="email"
-            placeholder="Enter your email"
-            class="w-full mt-2 p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-400"
-          />
-        </div>
+        <BaseInput
+          v-model="member.email"
+          :type="email"
+          :placeholder="'Enter your email'"
+          :label="'Email'"
+          :id="'email'"
+        />
         <!-- Password Input -->
-        <div>
-          <label for="password" class="block text-sm font-medium text-gray-700">
-            Password
-          </label>
-          <input
-            v-model="member.password"
-            id="password"
-            type="password"
-            placeholder="Enter your password"
-            class="w-full mt-2 p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-400"
-          />
-        </div>
+        <BaseInput
+          v-model="member.password"
+          :label="'Password'"
+          :type="password"
+          :placeholder="'Enter your password'"
+          :id="'password'"
+        />
         <!-- Submit Button -->
         <div>
           <button
@@ -53,6 +43,7 @@
 import axios from "axios";
 import { reactive, ref } from "vue";
 import router from "../router";
+import BaseInput from "../components/base/BaseInput.vue";
 
 const member = reactive({
   email: "",
