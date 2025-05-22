@@ -9,7 +9,7 @@
             Name
           </label>
           <input
-              v-model="name"
+              v-model="member.name"
               id="name"
               type="text"
               placeholder="Enter your name"
@@ -22,7 +22,7 @@
             Email
           </label>
           <input
-              v-model="email"
+              v-model="member.email"
               id="email"
               type="email"
               placeholder="Enter your email"
@@ -35,7 +35,7 @@
             Password
           </label>
           <input
-              v-model="password"
+              v-model="member.password"
               id="password"
               type="password"
               placeholder="Create a password"
@@ -48,10 +48,23 @@
             Confirm Password
           </label>
           <input
-              v-model="confirmPassword"
+              v-model="member.confirmPassword"
               id="confirm-password"
               type="password"
               placeholder="Confirm your password"
+              class="w-full mt-2 p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-400"
+          />
+        </div>
+        <!--Phone Number-->
+        <div>
+          <label for="confirm-password" class="block text-sm font-medium text-gray-700">
+            Phone Numbers
+          </label>
+          <input
+              v-model="member.phone"
+              id="confirm-password"
+              type="password"
+              placeholder="Confirm your phone number"
               class="w-full mt-2 p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-400"
           />
         </div>
@@ -74,4 +87,24 @@
 </template>
 
 
-<script setup></script>
+<script setup>
+import axios from 'axios';
+import {reactive, ref} from 'vue';
+
+// 테스트용 정규 표현식
+const emailRegTest = /.*/;
+const passwordRegTest = /.*/;
+const confirmPasswordRegTest = /.*/;
+const phoneRegTest = /.*/;
+
+const member = reactive({
+  name: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
+  phone: '',
+});
+
+
+
+</script>
