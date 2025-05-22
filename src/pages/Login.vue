@@ -52,6 +52,7 @@
 <script setup>
 import axios from "axios";
 import { reactive, ref } from "vue";
+import router from "../router";
 
 const member = reactive({
   email: "",
@@ -65,23 +66,20 @@ const login = async () => {
 
   userList.value = response.data;
 
-  const matchID = userList.value.filter(
+  const matchedID = userList.value.find(
     (user) => user.email === member.email && user.pwd === member.password
   );
 
   console.log(member.email, member.password);
   console.log(userList.value);
-  console.log(matchID);
+  console.log(matchedID);
 
-  if (matchID) {
+  if (matchedID) {
     console.log("회원 정보가 있습니다.");
-    const user = {
-      email: member.email,
-      password: member.password,
-      name: member.name,
-      phone: member.phone,
-    };
-    localStorage.setItem(user, JSON.stringify(user));
+    localStorage.setItem("user", JSON.stringify(matchedID));
+    router.push("/home");
+  } else {
+    alert("이메일 또는 비밀번호가 틀렸습니다.");
   }
 };
 </script>
