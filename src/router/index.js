@@ -1,11 +1,18 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Login from "../pages/Login.vue";
 import SignUp from "../pages/SignUp.vue";
+import Layout from "../Layout.vue";
+import { hydrateOnMediaQuery } from "vue";
 
 // 라우터 페이지 등록
 const routes = [
   { path: "/", component: Login },
   { path: "/signup", component: SignUp },
+  {
+    path: "/home",
+    component: Layout,
+    children: [{ path: "", component: hydrateOnMediaQuery }],
+  },
 ];
 
 // 라우터 생성
