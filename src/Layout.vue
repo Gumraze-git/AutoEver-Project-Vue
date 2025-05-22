@@ -9,16 +9,12 @@
           <router-link class="hover:underline" to="/members"
             >Members</router-link
           >
-          <div v-if="userStore.name" class="flex gap-4">
-            <span>{{ userStore.name }}</span>
-            <button class="hover:underline" @click="handleLogout">
-              로그아웃
-            </button>
+          <div class="flex gap-4">
+            <span>NAME</span>
+            <button class="hover:underline">로그아웃</button>
           </div>
-          <div v-else>
-            <button class="hover:underline" @click="router.push('/')">
-              로그인
-            </button>
+          <div class="flex gap-4">
+            <button class="hover:underline">로그인</button>
           </div>
         </nav>
       </div>
