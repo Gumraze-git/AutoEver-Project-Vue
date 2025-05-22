@@ -2,10 +2,10 @@
   <div class="flex flex-col min-h-screen">
     <header class="bg-gray-800 text-white px-6 py-4 shadow-md">
       <div class="container mx-auto flex items-center justify-between">
-        <h1 class="text-xl font-bold">LOGO</h1>
+        <router-link class="hover:underline" to="/home">
+          <h1 class="text-xl font-bold">LOGO</h1>
+        </router-link>
         <nav class="flex space-x-4">
-          <router-link class="hover:underline" to="/home">Home</router-link>
-          <router-link class="hover:underline" to="/about">About</router-link>
           <router-link class="hover:underline" to="/members"
             >Members</router-link
           >
