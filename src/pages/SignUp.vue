@@ -2,7 +2,7 @@
   <div class="min-h-screen flex items-center justify-center bg-gray-100">
     <div class="bg-white shadow-md rounded-lg p-8 w-full max-w-md">
       <h2 class="text-2xl font-bold text-gray-800 text-center">Sign Up</h2>
-      <form class="space-y-1 mt-6">
+      <div class="space-y-1 mt-6">
         <!-- Name Input -->
         <div>
           <label for="name" class="block text-sm font-medium text-gray-700">
@@ -97,15 +97,12 @@
         </div>
         <!--Phone Number-->
         <div>
-          <label
-            for="confirm-password"
-            class="block text-sm font-medium text-gray-700"
-          >
+          <label for="phone" class="block text-sm font-medium text-gray-700">
             Phone Numbers
           </label>
           <input
             v-model="member.phone"
-            id="confirm-password"
+            id="phone"
             type="tel"
             placeholder="Confirm your phone number"
             class="w-full mt-2 p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-400"
@@ -126,14 +123,14 @@
         <!-- Submit Button -->
         <div class="pt-4">
           <button
-            type="submit"
+            @click="submit"
             class="w-full py-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring focus:bg-blue-600 disabled:bg-gray-800 disabled:text-gray-400"
             :disabled="!submitState"
           >
             Sign Up
           </button>
         </div>
-      </form>
+      </div>
       <p class="mt-4 text-sm text-gray-600 text-center">
         Already have an account?
         <a href="/login" class="text-blue-500 hover:underline">Login</a>
@@ -145,6 +142,7 @@
 <script setup>
 import axios from "axios";
 import { ref, computed, onMounted, reactive } from "vue";
+import router from "../router";
 
 // 정규식 패턴
 const emailRegTest = /.*/;
@@ -186,24 +184,19 @@ const submitState =
   validConfirmPassword &&
   validPhone;
 
-const userList = ref([]);
-
 const submit = async () => {
-  try {
-    const response = await axios.post(
-      "http://222.117.237.119:8111/auth/signup",
-      {
-        email: member.email,
-        pwd: member.password,
-        name: member.name,
-      }
-    );
+  console.log(member.email, member.password, member.name);
+  const response = await axios.post("http://222.117.237.119:8111/auth/signup", {
+    email: member.email,
+    pwd: member.password,
+    name: member.name,
+  });
 
-    alert("회원가입 성공");
-  } catch (error) {
-    console.log("데이터 통신 실패", error);
+  if (response.data) {
+    alert("회원 가입 성공");
+    router.push("/");
+  } else {
+    alert("회원 가입 실패");
   }
 };
-
-submit();
 </script>
