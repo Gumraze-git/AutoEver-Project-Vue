@@ -106,7 +106,7 @@
           <input
             v-model="member.phone"
             id="confirm-password"
-            type="password"
+            type="tel"
             placeholder="Confirm your phone number"
             class="w-full mt-2 p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-400"
           />
@@ -143,6 +143,7 @@
 </template>
 
 <script setup>
+import axios from "axios";
 import { ref, computed, onMounted, reactive } from "vue";
 
 // 정규식 패턴
@@ -167,7 +168,7 @@ const useValidation = (targetRef, regPattern) => {
 };
 
 // 정규식 검사 결과 객체(return: bool)
-const validName = member.name.length > 1;
+const validName = computed(() => member.name.length > 0);
 const validEmail = useValidation(() => member.email, emailRegTest);
 const validPassword = useValidation(() => member.password, passwordRegTest);
 const validPhone = useValidation(() => member.phone, phoneRegTest);
@@ -184,4 +185,25 @@ const submitState =
   validPassword &&
   validConfirmPassword &&
   validPhone;
+
+const userList = ref([]);
+
+const submit = async () => {
+  try {
+    const response = await axios.post(
+      "http://222.117.237.119:8111/auth/signup",
+      {
+        email: member.email,
+        pwd: member.password,
+        name: member.name,
+      }
+    );
+
+    alert("회원가입 성공");
+  } catch (error) {
+    console.log("데이터 통신 실패", error);
+  }
+};
+
+submit();
 </script>
