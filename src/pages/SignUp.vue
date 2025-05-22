@@ -23,6 +23,7 @@
           </label>
           <input
             v-model="member.email"
+            @input=""
             id="email"
             type="email"
             placeholder="Enter your email"
@@ -88,8 +89,8 @@
             >
               {{
                 validConfirmPassword
-                  ? "사용 가능한 이메일 입니다."
-                  : "사용 불가능한 이메일 입니다."
+                  ? "비밀번호가 일치합니다."
+                  : "비밀번호가 일치하지 않습니다."
               }}
             </p>
           </div>
@@ -116,8 +117,8 @@
             >
               {{
                 validPhone
-                  ? "사용 가능한 이메일 입니다."
-                  : "사용 불가능한 이메일 입니다."
+                  ? "사용 가능한 번호 입니다."
+                  : "사용 불가능한 번호 입니다."
               }}
             </p>
           </div>
@@ -141,11 +142,11 @@
 </template>
 
 <script setup>
-import { computed, reactive } from "vue";
+import { ref, computed, onMounted, reactive } from "vue";
 
+// 정규식 패턴
 const emailRegTest = /.*/;
 const passwordRegTest = /.*/;
-const passwordConfirmRegTest = /.*/;
 const phoneRegTest = /.*/;
 
 const member = reactive({
@@ -156,17 +157,22 @@ const member = reactive({
   phone: "",
 });
 
-const useValidation = (testObject, regPattern) => {
-  return computed(() => regPattern.test(testObject.value));
+// 이메일, 비밀번호, 전화번호 등의 정규식 검사 객체
+const useValidation = (targetRef, regPattern) => {
+  return computed(() => {
+    const value = targetRef();
+    return value.length > 0 && regPattern.test(value);
+  });
 };
 
-const validEmail = useValidation(member.email, emailRegTest);
-const validPassword = useValidation(member.password, passwordRegTest);
+// 정규식 검사 결과 객체(return: bool)
+const validEmail = useValidation(() => member.email, emailRegTest);
+const validPassword = useValidation(() => member.password, passwordRegTest);
+const validPhone = useValidation(() => member.phone, phoneRegTest);
 const validConfirmPassword = computed(() => {
   return (
     member.confirmPassword.length > 0 &&
     member.confirmPassword === member.password
   );
 });
-const validPhone = useValidation(member.phone, phoneRegTest);
 </script>
