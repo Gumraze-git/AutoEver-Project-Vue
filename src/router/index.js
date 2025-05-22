@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Login from "../pages/Login.vue";
 import SignUp from "../pages/SignUp.vue";
 import Layout from "../Layout.vue";
-import { hydrateOnMediaQuery } from "vue";
+import Home from "../pages/Home.vue";
 
 // 라우터 페이지 등록
 const routes = [
@@ -11,7 +11,7 @@ const routes = [
   {
     path: "/home",
     component: Layout,
-    children: [{ path: "", component: hydrateOnMediaQuery }],
+    children: [{ path: "", component: Home }],
   },
 ];
 
