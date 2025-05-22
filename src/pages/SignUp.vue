@@ -127,7 +127,8 @@
         <div class="pt-4">
           <button
             type="submit"
-            class="w-full py-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring focus:bg-blue-600"
+            class="w-full py-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring focus:bg-blue-600 disabled:bg-gray-800 disabled:text-gray-400"
+            :disabled="!submitState"
           >
             Sign Up
           </button>
@@ -166,6 +167,7 @@ const useValidation = (targetRef, regPattern) => {
 };
 
 // 정규식 검사 결과 객체(return: bool)
+const validName = member.name.length > 1;
 const validEmail = useValidation(() => member.email, emailRegTest);
 const validPassword = useValidation(() => member.password, passwordRegTest);
 const validPhone = useValidation(() => member.phone, phoneRegTest);
@@ -175,4 +177,11 @@ const validConfirmPassword = computed(() => {
     member.confirmPassword === member.password
   );
 });
+
+const submitState =
+  validName &&
+  validEmail &&
+  validPassword &&
+  validConfirmPassword &&
+  validPhone;
 </script>
