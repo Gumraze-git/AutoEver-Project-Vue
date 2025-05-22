@@ -1,11 +1,7 @@
-<script setup>
-import Login from "./pages/Login.vue";
-import SignUp from "./pages/SignUp.vue";
-</script>
+<script setup></script>
 
 <template>
-  <Login />
-  <SignUp />
+  <router-view />
 </template>
 
 <style scoped></style>
