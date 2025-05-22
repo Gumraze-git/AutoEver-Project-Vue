@@ -4,99 +4,65 @@
       <h2 class="text-2xl font-bold text-gray-800 text-center">Sign Up</h2>
       <div class="space-y-1 mt-6">
         <!-- Name Input -->
-        <div>
-          <label for="name" class="block text-sm font-medium text-gray-700">
-            Name
-          </label>
-          <input
-            v-model="member.name"
-            id="name"
-            type="text"
-            placeholder="Enter your name"
-            class="w-full mt-2 p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-400"
-          />
-        </div>
+        <BaseInput
+          :type="'text'"
+          :placeholder="'Enter your name'"
+          :id="'name'"
+          :label="'Name'"
+          :validType="false"
+        />
         <!-- Email Input -->
-        <div class="pt-4">
-          <label for="email" class="block text-sm font-medium text-gray-700">
-            Email
-          </label>
-          <input
-            v-model="member.email"
-            @input=""
-            id="email"
-            type="email"
-            placeholder="Enter your email"
-            class="w-full mt-2 p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-400"
-          />
-          <div class="flex justify-end m-0 p-0">
-            <p
-              class="text-sm mt-1"
-              :class="validEmail ? 'text-green-500' : 'text-red-500'"
-            >
-              {{
-                validEmail
-                  ? "사용 가능한 이메일 입니다."
-                  : "사용 불가능한 이메일 입니다."
-              }}
-            </p>
-          </div>
-        </div>
+        <BaseInput
+          :type="'text'"
+          :placeholder="'Enter your email'"
+          :id="'email'"
+          :label="'Email'"
+          :validType="true"
+          :validInput="validEmail"
+          :validTrue="'사용 가능한 이메일 입니다.'"
+          :validFalse="'사용 불가능한 이메일 입니다.'"
+          v-model="member.email"
+          class="pt-4"
+        />
         <!-- Password Input -->
-        <div class="pt-0">
-          <label for="password" class="block text-sm font-medium text-gray-700">
-            Password
-          </label>
-          <input
-            v-model="member.password"
-            id="password"
-            type="password"
-            placeholder="Create a password"
-            class="w-full mt-2 p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-400"
-          />
-          <div class="flex justify-end m-0 p-0">
-            <p
-              class="text-sm mt-1"
-              :class="validPassword ? 'text-green-500' : 'text-red-500'"
-            >
-              {{
-                validPassword
-                  ? "사용 가능한 비밀번호 입니다."
-                  : "사용 불가능한 비밀번호 입니다."
-              }}
-            </p>
-          </div>
-        </div>
+        <BaseInput
+          :type="'password'"
+          :placeholder="'Create a password'"
+          :id="'password'"
+          :label="'Password'"
+          :validType="true"
+          :validInput="validPassword"
+          :validTrue="'사용 가능한 비밀번호 입니다.'"
+          :validFalse="'사용 불가능한 비밀번호 입니다.'"
+          v-model="member.password"
+        />
+
         <!-- Confirm Password -->
-        <div>
-          <label
-            for="confirm-password"
-            class="block text-sm font-medium text-gray-700"
-          >
-            Confirm Password
-          </label>
-          <input
-            v-model="member.confirmPassword"
-            id="confirm-password"
-            type="password"
-            placeholder="Confirm your password"
-            class="w-full mt-2 p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:border-blue-400"
-          />
-          <div class="flex justify-end m-0 p-0">
-            <p
-              class="text-sm mt-1"
-              :class="validConfirmPassword ? 'text-green-500' : 'text-red-500'"
-            >
-              {{
-                validConfirmPassword
-                  ? "비밀번호가 일치합니다."
-                  : "비밀번호가 일치하지 않습니다."
-              }}
-            </p>
-          </div>
-        </div>
+        <BaseInput
+          :type="'password'"
+          :placeholder="'Confirm your phone number'"
+          :id="'confirm-password'"
+          :label="'Confirm Password'"
+          :validType="true"
+          :validInput="validConfirmPassword"
+          :validTrue="'비밀번호가 일치합니다.'"
+          :validFalse="'비밀번호가 일치하지 않습니다.'"
+          v-model="member.confirmPassword"
+        />
         <!--Phone Number-->
-        <div>
+        <BaseInput
+          :type="'tel'"
+          :placeholder="'Confirm your phone number'"
+          :id="'phone'"
+          :label="'Phone Numbers'"
+          :validType="true"
+          :validInput="validPhone"
+          :validTrue="'사용 가능한 번호 입니다'"
+          :validFalse="'사용 불가능한 번호 입니다.'"
+          v-model="member.phone"
+        />
+
+        <!-- <div>
           <label for="phone" class="block text-sm font-medium text-gray-700">
             Phone Numbers
           </label>
@@ -119,7 +85,7 @@
               }}
             </p>
           </div>
-        </div>
+        </div> -->
         <!-- Submit Button -->
         <div class="pt-4">
           <button
@@ -143,8 +109,9 @@
 
 <script setup>
 import axios from "axios";
-import { ref, computed, onMounted, reactive } from "vue";
+import { computed, reactive } from "vue";
 import router from "../router";
+import BaseInput from "../components/base/BaseInput.vue";
 
 // 정규식 패턴
 const emailRegTest = /.*/;
